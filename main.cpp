@@ -15,6 +15,12 @@ double iva;
 double total;
 double pago;
 double cambio;
+int numeroventas=0;
+double totalvendido=0;
+double ventamayor=0;
+double ventamenor=0;
+double promedioventa=0;
+double totaldescuentos=0;
 do{
     cout<<"SISTEMA DE CAJA"<< endl;
     cout<<"1. Registrar venta"<< endl;
@@ -104,14 +110,64 @@ do{
          cambio=pago-total;
          cout<<"Cambio del cliente: Q"<<cambio<<endl;
          cout<<"----------GRACIAN POR SU COMPRA----------"<<endl;
+         if (subtotal>0)
+         {
+            numeroventas=numeroventas+1;
+            totalvendido=totalvendido+total;
+            totaldescuentos=totaldescuentos+Montodescuento;
+            if (numeroventas==1)
+            {
+                ventamayor=total;
+                ventamenor=total;
+            }
+           else{
+            if (total>ventamayor)
+            {
+                ventamayor=total;
+            }
+            if (total<ventamenor)
+            {
+                ventamenor=total;
+            }
+            
+           } 
+         }
+         
         break;
 
         case 2:
         cout<<"Resumen parcial del dia"<<endl;
+        if (numeroventas==0)
+        {
+            cout<<"No hay ventas registradas."<<endl;
+        }
+        else{
+            promedioventa=totalvendido/numeroventas;
+            cout<<"Numero de ventas: "<<numeroventas<<endl;
+            cout<<"Total vendido: Q"<<totalvendido<<endl;
+            cout<<"Venta mayor: Q"<<ventamayor<<endl;
+            cout<<"Venta menor: Q"<<ventamenor<<endl;
+            cout<<"Promedio de venta: Q"<<promedioventa<<endl;
+            cout<<"Total de descuentos: Q"<<totaldescuentos<<endl;
+        }
+        
         break;
 
         case 3:
         cout<<"Cerrando caja"<<endl;
+         if (numeroventas==0)
+        {
+            cout<<"No hay ventas registradas."<<endl;
+        }
+        else{
+            promedioventa=totalvendido/numeroventas;
+            cout<<"Numero de ventas: "<<numeroventas<<endl;
+            cout<<"Total vendido: Q"<<totalvendido<<endl;
+            cout<<"Venta mayor: Q"<<ventamayor<<endl;
+            cout<<"Venta menor: Q"<<ventamenor<<endl;
+            cout<<"Promedio de venta: Q"<<promedioventa<<endl;
+            cout<<"Total de descuentos: Q"<<totaldescuentos<<endl;
+        }
         break;
 
         default:
