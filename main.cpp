@@ -1,12 +1,20 @@
 #include <iostream>
 #include <limits>
+#include <iomanip>
 using namespace std;
 
 int main() {
+    cout<<fixed<<setprecision(2);
 int opcion;
 double precio;
 int cantidad;
 double subtotal;
+double descuento;
+double Montodescuento;
+double iva;
+double total;
+double pago;
+double cambio;
 do{
     cout<<"SISTEMA DE CAJA"<< endl;
     cout<<"1. Registrar venta"<< endl;
@@ -61,7 +69,41 @@ do{
         subtotal= subtotal + (precio*cantidad);
         }
         } while (precio !=0); 
+         cout<<"----------RECIBO DE VENTA----------"<<endl;
          cout<<"Subtotal de la venta: Q"<<subtotal<<endl;
+         if (subtotal<100){
+            descuento=0;
+         }
+         else if (subtotal<500)
+         {
+            descuento=0.05;
+         }
+         else{
+            descuento=0.10;
+
+         }
+         Montodescuento=subtotal*descuento;
+         cout<<"Descuento aplicado: Q"<<Montodescuento<<endl;
+         iva=(subtotal-Montodescuento)*0.12;
+         cout<<"IVA (12%): Q"<< iva<<endl;
+         total=subtotal-Montodescuento+iva;
+         cout<<"Total a pagar: Q"<<total<<endl;
+         cout<<"Ingrese el monto recibido: Q";
+         cin>>pago;
+         while (cin.fail() || pago<total)
+         {
+             if (cin.fail())
+            {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            }
+            cout<<"Error: el monto recibido es invalido o insuficiente."<<endl;
+            cout<<"Ingrese nuevamente el pago: Q";
+            cin>> pago;
+         }
+         cambio=pago-total;
+         cout<<"Cambio del cliente: Q"<<cambio<<endl;
+         cout<<"----------GRACIAN POR SU COMPRA----------"<<endl;
         break;
 
         case 2:
